@@ -1,21 +1,15 @@
 SearchApp::Application.routes.draw do
-  resources :profiles
-
   match 'user/edit' => 'users#edit', :as => :edit_current_user
 
   match 'signup' => 'users#new', :as => :signup
 
   match 'logout' => 'sessions#destroy', :as => :logout
-  match 'user/delete' =>'users#destroy', :as => :delete_current_user
 
   match 'login' => 'sessions#new', :as => :login
-  match '/user' => 'users#show', :as => :profile 
-  root :to => 'users#show'
+  root :to => 'sessions#new'
   resources :sessions
   resources :friendships
-  resources :users do 
-    resources :profiles
-  end
+  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
