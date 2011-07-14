@@ -1,6 +1,6 @@
 <% title "My profile" %>
 <p>Username: <%= @user.username%></p>
-<p><%= link_to "Find friends", users_path%>
+<p><%= link_to "Find friends", users_path%></p>
 <h2> Your friends </h2>
 <ul>
 	<% for friendship in @user.friendships %>

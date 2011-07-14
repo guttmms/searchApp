@@ -10,11 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110713203635) do
+ActiveRecord::Schema.define(:version => 20110714001506) do
+
+  create_table "attributes", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "industry"
+    t.string   "location"
+    t.string   "school"
+    t.text     "bio"
+    t.text     "my_story"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_attributes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "attribute_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

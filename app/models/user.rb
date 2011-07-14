@@ -1,10 +1,15 @@
 class User < ActiveRecord::Base
+  has_one :profile
+  
   has_many :friendships
   has_many :friends, :through => :friendships
   
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   # new columns need to be added here to be writable through mass assignment
+  
+  after_create :create_profile
+  
   attr_accessible :username, :email, :password, :password_confirmation
 
   attr_accessor :password
@@ -19,6 +24,9 @@ class User < ActiveRecord::Base
   validates_length_of :password, :minimum => 4, :allow_blank => true
 
   # login can be either username or email address
+  def create_profile
+    self.profile = Profile.new(:user_id => self.id)
+  end
   def self.authenticate(login, pass)
     user = find_by_username(login) || find_by_email(login)
     return user if user && user.password_hash == user.encrypt_password(pass)

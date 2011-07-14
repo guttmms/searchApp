@@ -1,0 +1,23 @@
+<h1>Listing profiles</h1>
+
+<table>
+  <tr>
+    <th>name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% for user in @profiles.users %>
+  <tr>
+	<td><%= user.username%></td>
+    <td><%= link_to 'Show', profile %></td>
+    <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
+    <td><%= link_to 'Destroy', profile, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+
+</table>
+<% end%>
+<br />
+
+<%= link_to 'New Profile', new_profile_path %>
